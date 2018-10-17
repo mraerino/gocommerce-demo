@@ -22,7 +22,7 @@ services:
     build:
       context: .
       args:
-        GOCOMMERCE_API_URL: /.netlify/commerce
+        DEMO_GOCOMMERCE_API_URL: /.netlify/commerce
     image: netlify/gocommerce-demo
     networks:
       - ingress

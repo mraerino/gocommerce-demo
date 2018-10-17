@@ -30,7 +30,7 @@ If you have a GoCommerce backend running somewhere and want to use the demo site
 **Notice:** *This is currently not working for making orders since your backend will not be able to reach your locally served site*
 
 ```bash
-export GOCOMMERCE_API_URL=https://<your backend>
+export DEMO_GOCOMMERCE_API_URL=https://<your backend>
 yarn start
 ```
 
@@ -39,8 +39,15 @@ yarn start
 *Builds into /dist*
 
 ```bash
-export GOCOMMERCE_API_URL=https://<your backend>
+export DEMO_GOCOMMERCE_API_URL=https://<your backend>
 yarn build
+```
+
+**Note:** You can also set the path to GoCommerce in `site/config.toml`
+
+```
+[params]
+    GocommerceAPI = "http://<your backend>"
 ```
 
 ### Locally using `docker-compose`

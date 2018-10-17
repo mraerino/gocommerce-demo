@@ -9,4 +9,4 @@ title = "GoCommerce Demo"
 disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
 #[params]
-#  gocommerceAPI = "http://localhost:3001/"
+#  GocommerceAPI = "http://localhost:3001/"

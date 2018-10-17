@@ -7,7 +7,7 @@ RUN yarn && gulp assets
 FROM klakegg/hugo:0.49-alpine AS hugo
 COPY ./site /src
 WORKDIR /src
-ARG GOCOMMERCE_API_URL=""
+ARG DEMO_GOCOMMERCE_API_URL=""
 RUN hugo -v -d /public
 
 FROM nginx:alpine
