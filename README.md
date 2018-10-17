@@ -27,6 +27,8 @@ If you have a GoCommerce backend running somewhere and want to use the demo site
 
 **Development**
 
+**Notice:** *This is currently not working for making orders since your backend will not be able to reach your locally served site*
+
 ```bash
 export GOCOMMERCE_API_URL=https://<your backend>
 yarn start
