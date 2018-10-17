@@ -1,0 +1,78 @@
+version: "3.5"
+
+networks:
+  ingress:
+    name: gocommerce-demo_ingress
+  gocommerce:
+  mailer:
+
+services:
+  ingress:
+    image: traefik
+    command: --api --docker --docker.exposedbydefault=false
+    networks:
+      - ingress
+    ports:
+      - "8080:80"
+      - "9090:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  frontend:
+    build:
+      context: .
+      args:
+        GOCOMMERCE_API_URL: /.netlify/commerce
+    image: netlify/gocommerce-demo
+    networks:
+      - ingress
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: "PathPrefix:/"
+
+  gocommerce:
+    image: netlify/gocommerce
+    command: gocommerce
+    env_file: .env
+    environment:
+      GOCOMMERCE_OPERATOR_TOKEN: "123456"
+      GOCOMMERCE_SITE_URL: http://localhost:8080
+      GOCOMMERCE_API_ENDPOINT: http://localhost:9001
+      GOCOMMERCE_DB_DRIVER: postgres
+      GOCOMMERCE_DB_DATABASE_URL: postgres://gocommerce:gocommerce@gocommerce_db?sslmode=disable
+      GOCOMMERCE_DB_AUTOMIGRATE: 1
+      GOCOMMERCE_SMTP_HOST: mailer
+      GOCOMMERCE_SMTP_PORT: 25
+      GOCOMMERCE_SMTP_ADMIN_EMAIL: no-reply@example.com
+    ports:
+      - 9001:8080
+    networks:
+      - gocommerce
+      - mailer
+      - ingress
+    labels:
+      traefik.enable: true
+      traefik.frontend.rule: "PathPrefixStrip:/.netlify/commerce"
+      traefik.docker.network: gocommerce-demo_ingress
+
+  gocommerce_db:
+    image: postgres:10-alpine
+    networks:
+      - gocommerce
+    volumes:
+      - gocommerce_db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: gocommerce
+      POSTGRES_PASSWORD: gocommerce
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+  mailer:
+    image: djfarrelly/maildev
+    command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
+    networks:
+      - mailer
+    ports:
+      - "9002:80"
+
+volumes:
+  gocommerce_db:

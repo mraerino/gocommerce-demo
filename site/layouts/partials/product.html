@@ -1,0 +1,34 @@
+{{ $showSection := .ShowSection }}
+{{ with .Product }}
+<div class="column">
+    {{ partial "gocommerce-meta" (dict "Product" . "Type" .Section) }}
+    <div class="ui fluid card">
+        <div class="image">
+            <img src="{{ .Params.Image | default "http://place-hold.it/300x300?text=Image%20missing" }}">
+        </div>
+        <div class="left aligned content">
+            <div class="header">{{ .Title }}</div>
+            {{ if $showSection }}
+            {{ $section := .Site.GetPage "section" .Section }}
+            <div class="meta">{{ $section.Title }}</div>
+            {{ end }}
+            <div class="description">
+                {{ .Description | default "" }}
+            </div>
+        </div>
+        <div class="left aligned extra content">
+            {{ range .Params.Prices }}
+            {{ partial "price" . }}
+            {{ end }}
+            {{ $section := .Site.GetPage "section" .Section }}
+            <button
+                class="ui red button right floated"
+                data-gocommerce-add="{{ $section.Permalink }}"
+                data-gocommerce-sku="{{ .Params.sku }}"
+            >
+                Buy now!
+            </button>
+        </div>
+    </div>
+</div>
+{{ end }}

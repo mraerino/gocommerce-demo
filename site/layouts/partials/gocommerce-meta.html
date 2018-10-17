@@ -1,0 +1,14 @@
+<script class="gocommerce-product" type="application/json">
+    {
+        "sku": {{ .Product.Params.sku | jsonify | safeJS }},
+        "title": {{ .Product.Title | jsonify | safeJS }},
+        {{ if .Product.Params.image }}
+        "image": {{ .Product.Params.image | jsonify | safeJS }},
+        {{ end }}
+        "type": {{ .Type | jsonify | safeJS }},
+        {{ if .Product.Params.downloads }}
+        "downloads": {{ .Product.Params.downloads | jsonify | safeJS }},
+        {{ end }}
+        "prices": {{ .Product.Params.prices | jsonify | safeJS }}
+    }
+</script>

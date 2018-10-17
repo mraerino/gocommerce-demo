@@ -1,8 +1,7 @@
 /*
   You can use import statements to include partials:
  */
-@import "imports/reset.css";
-
+@import "semantic-ui-css/semantic.css";
 
 /*
   Or add your statements here:
@@ -11,4 +10,25 @@ body{
   font-family: sans-serif;
   font-size: 1em;
   text-align: center;
+}
+
+header {
+  padding: 2rem 0;
+}
+
+.product-listing {
+  padding-top: 2rem;
+}
+
+.price {
+  font-size: 1.3rem;
+  line-height: 2.5rem;
+}
+
+.price:after {
+  content: ' | ';
+}
+
+.price:last-of-type:after {
+  content: '';
 }

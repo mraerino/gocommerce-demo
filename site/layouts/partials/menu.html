@@ -1,0 +1,16 @@
+{{ $permalink := .Permalink }}
+<div class="ui container">
+    <nav class="ui secondary pointing menu">
+        <a href="/" class="{{ if eq .Permalink "/" }}active {{ end }}item">
+            All
+        </a>
+        {{ range .Site.Sections }}
+        <a href="{{ .Permalink }}" class="{{ if eq .Permalink $permalink }}active {{ end }}item">
+            {{ .Title }}
+        </a>
+        {{ end }}
+        <div class="right menu">
+            <div class="ui item" data-gocommerce-button></div>
+        </div>
+    </nav>
+</div>

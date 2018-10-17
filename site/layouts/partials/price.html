@@ -1,0 +1,9 @@
+<span class="price">
+    {{ if eq .currency "EUR" }}
+    {{ .amount }} €
+    {{ else if eq .currency "USD" }}
+    $ {{ .amount }}
+    {{ else }}
+    {{ .currency }} {{ .amount }}
+    {{ end }}
+</span>

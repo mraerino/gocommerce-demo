@@ -1,0 +1,8 @@
+{{ $showSection := eq .ShowSection 1 }}
+<div class="ui container product-listing">
+    <div class="ui three column stackable grid">
+        {{ range .Products }}
+        {{ partial "product" (dict "Product" . "ShowSection" $showSection) }}
+        {{ end }}
+    </div>
+</div>

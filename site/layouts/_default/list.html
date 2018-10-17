@@ -1,0 +1,8 @@
+{{ define "main" }}
+
+{{ partial "menu" . }}
+
+{{ $products := where .Pages "Section" .Section }}
+{{ partial "listing" (dict "Products" $products) }}
+
+{{end}}

@@ -1,0 +1,7 @@
+{{ $gocommerceapi := getenv "GOCOMMERCE_API_URL" | default (.Param "gocommerceapi") }}
+{{ if $gocommerceapi }}
+<script>
+    window.GocommerceAPI = {{ $gocommerceapi | strings.TrimSuffix "/" | jsonify | safeJS }};
+</script>
+{{ end }}
+<script src="https://gocommerce-widget.netlify.com/netlify-gocommerce-widget.js"></script>
