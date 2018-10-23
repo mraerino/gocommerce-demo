@@ -1,3 +1,3 @@
 ---
-title: Beer
+title: 🍻 Beer
 ---

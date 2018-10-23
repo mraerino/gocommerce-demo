@@ -1,3 +1,3 @@
 ---
-title: Coffee
+title: ☕️ Coffee
 ---

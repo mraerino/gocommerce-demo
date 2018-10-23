@@ -1,3 +1,3 @@
 ---
-title: E-Books
+title: 📖 E-Books
 ---
