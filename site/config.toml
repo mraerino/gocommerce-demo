@@ -10,4 +10,4 @@ disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
 [params]
   GocommerceAPI = "/.netlify/commerce"
-#    GotrueAPI = "http://localhost:9004"
+#  GotrueAPI = "http://localhost:9004"
