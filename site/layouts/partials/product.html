@@ -4,7 +4,7 @@
     {{ partial "gocommerce-meta" (dict "Product" . "Type" .Section) }}
     <div class="ui fluid card">
         <div class="image">
-            <img src="{{ .Params.Image | default "http://place-hold.it/300x300?text=Image%20missing" }}">
+            <img src="{{ .Params.Image | default "https://place-hold.it/300x300?text=Image%20missing" }}">
         </div>
         <div class="left aligned content">
             <div class="header">{{ .Title }}</div>
