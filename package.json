@@ -10,7 +10,8 @@
     "build-preview": "gulp build-preview",
     "start": "gulp server",
     "start-preview": "gulp server-preview",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "netlify-config": "node scripts/replace_env.js netlify.toml"
   },
   "author": "Marcus Weiner <github.com/mraerino>",
   "license": "MIT",
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "jsonwebtoken": "^8.3.0",
+    "mustache": "^3.0.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5"
   }

@@ -8,5 +8,6 @@ title = "GoCommerce Demo"
 # https://gohugo.io/getting-started/configuration/#toml-configuration
 disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
-#[params]
-#  GocommerceAPI = "http://localhost:3001/"
+[params]
+  GocommerceAPI = "/.netlify/commerce"
+#    GotrueAPI = "http://localhost:9004"

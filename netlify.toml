@@ -1,6 +1,13 @@
 [build]
-  command = "npm run build"
+  command = "npm run netlify-config && npm run build"
   publish = "dist"
 
 [context.deploy-preview]
-  command = "npm run build-preview"
+  command = "npm run netlify-config && npm run build-preview"
+
+[[redirects]]
+  from = "/.netlify/commerce/*"
+  to = "{{{ DEMO_GOCOMMERCE_PROXY_URL }}}/:splat"
+  status = 200
+  force = true
+  sign = "GOCOMMERCE_JWT_SECRET"
