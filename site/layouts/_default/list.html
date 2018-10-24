@@ -2,7 +2,6 @@
 
 {{ partial "menu" . }}
 
-{{ $products := where .Pages "Section" .Section }}
-{{ partial "listing" (dict "Products" $products) }}
+{{ partial "listing" (dict "Products" .Pages) }}
 
 {{end}}
