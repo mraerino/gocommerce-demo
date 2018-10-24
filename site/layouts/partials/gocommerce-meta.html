@@ -8,9 +8,9 @@
 {{- $s.SetInMap "meta" "sku" .Product.Params.sku -}}
 {{- $s.SetInMap "meta" "title" .Product.Title -}}
 
-{{- if .Product.Params.image -}}
-    {{- $s.SetInMap "meta" "image" .Product.Params.image -}}
-{{- end -}}
+{{ if .Image }}
+    {{ $s.SetInMap "meta" "image" .Image.RelPermalink }}
+{{ end }}
 
 {{- $s.SetInMap "meta" "type" .Type -}}
 

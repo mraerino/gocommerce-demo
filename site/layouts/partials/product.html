@@ -1,10 +1,17 @@
 {{ $showSection := .ShowSection }}
 {{ with .Product }}
+    {{ $section := .Site.GetPage "section" .Section }}
+    {{ $images := ($section.Resources.ByType "image").Match (printf "%s.*" .File.TranslationBaseName) }}
+    {{ $scratch := newScratch }}
+    {{ $thumb := index $images 0 }}
+    {{ if $thumb }}
+        {{ $scratch.Set "image" ($thumb.Fill "300x200 Center").RelPermalink }}
+    {{ end }}
 <div class="column">
-    {{ partial "gocommerce-meta" (dict "Product" . "Type" .Section) }}
+    {{ partial "gocommerce-meta" (dict "Product" . "Type" .Section "Image" ($thumb.Fill "100x100")) }}
     <div class="ui fluid card">
         <div class="image">
-            <img src="{{ .Params.Image | default "https://place-hold.it/300x300?text=Image%20missing" }}">
+            <img src="{{ $scratch.Get "image" | default "https://place-hold.it/300x200?text=Image%20missing" }}">
         </div>
         <div class="left aligned content">
             <div class="header">{{ .Title }}</div>

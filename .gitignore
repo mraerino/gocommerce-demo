@@ -4,3 +4,6 @@ dist/
 .env
 
 yarn-error.log
+
+# Hugo Resources
+/site/resources/
