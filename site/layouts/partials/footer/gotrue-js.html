@@ -1,6 +1,6 @@
-{{- $gotrueapi := getenv "DEMO_GOTRUE_API_URL" | default (.Param "GotrueAPI") -}}
-{{- if $gotrueapi -}}
+{{ $gotrueapi := getenv "DEMO_GOTRUE_API_URL" | default (.Param "GotrueAPI") }}
+{{ if $gotrueapi }}
 <script>
     window.GotrueAPI = {{ $gotrueapi | strings.TrimSuffix "/" | jsonify | safeJS }};
 </script>
-{{- end -}}
+{{ end }}

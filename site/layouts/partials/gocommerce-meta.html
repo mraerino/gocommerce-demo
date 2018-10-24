@@ -1,24 +1,24 @@
-{{- $s := newScratch -}}
-{{- $s.Set "prices" slice -}}
-{{- range $index, $price := .Product.Params.prices -}}
-    {{- $s.Add "prices" (dict "amount" (string .amount) "currency" .currency) -}}
-{{- end -}}
+{{ $s := newScratch }}
+{{ $s.Set "prices" slice }}
+{{ range $index, $price := .Product.Params.prices }}
+    {{ $s.Add "prices" (dict "amount" (string .amount) "currency" .currency) }}
+{{ end }}
 
-{{- $s.Set "meta" dict -}}
-{{- $s.SetInMap "meta" "sku" .Product.Params.sku -}}
-{{- $s.SetInMap "meta" "title" .Product.Title -}}
+{{ $s.Set "meta" dict }}
+{{ $s.SetInMap "meta" "sku" .Product.Params.sku }}
+{{ $s.SetInMap "meta" "title" .Product.Title }}
 
 {{ if .Image }}
     {{ $s.SetInMap "meta" "image" .Image.RelPermalink }}
 {{ end }}
 
-{{- $s.SetInMap "meta" "type" .Type -}}
+{{ $s.SetInMap "meta" "type" .Type }}
 
-{{- if .Product.Params.downloads -}}
-    {{- $s.SetInMap "meta" "downloads" .Product.Params.downloads -}}
-{{- end -}}
+{{ if .Product.Params.downloads }}
+    {{ $s.SetInMap "meta" "downloads" .Product.Params.downloads }}
+{{ end }}
 
-{{- $s.SetInMap "meta" "prices" ($s.Get "prices") -}}
+{{ $s.SetInMap "meta" "prices" ($s.Get "prices") }}
 
 <script class="gocommerce-product" type="application/json">
     {{ $s.Get "meta" | jsonify | safeJS }}
