@@ -9,7 +9,11 @@ import cssImport from "postcss-import";
 import cssnext from "postcss-cssnext";
 import BrowserSync from "browser-sync";
 import webpack from "webpack";
+import dotenv from "dotenv";
+import proxy from "http-proxy-middleware";
 import webpackConfig from "./webpack.conf";
+
+dotenv.config();
 
 const browserSync = BrowserSync.create();
 
@@ -55,25 +59,32 @@ gulp.task("js", (cb) => {
 });
 
 // Move all fonts in a flattened directory
-gulp.task('fonts', () => (
+gulp.task("fonts", () => (
   gulp.src("./src/fonts/**/*")
     .pipe(flatten())
     .pipe(gulp.dest("./dist/fonts"))
     .pipe(browserSync.stream())
 ));
 
+const hasLocalGocommerce = "DEVELOP_GOCOMMERCE_API_URL" in process.env;
+const gocommerceProxy = proxy("/.netlify/commerce", {
+  target: process.env.DEVELOP_GOCOMMERCE_API_URL,
+  pathRewrite: {"^/.netlify/commerce" : ""},
+});
+
 // Development server with browsersync
 function runServer() {
   browserSync.init({
     server: {
-      baseDir: "./dist"
+      baseDir: "./dist",
+      middleware: hasLocalGocommerce ? [gocommerceProxy] : [],
     }
   });
   gulp.watch("./src/js/**/*.js", ["js"]);
   gulp.watch("./src/css/**/*.css", ["css"]);
   gulp.watch("./src/fonts/**/*", ["fonts"]);
   gulp.watch("./site/**/*", ["hugo"]);
-};
+}
 
 /**
  * Run hugo and build the site
