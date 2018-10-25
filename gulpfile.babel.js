@@ -67,17 +67,19 @@ gulp.task("fonts", () => (
 ));
 
 const hasLocalGocommerce = "DEVELOP_GOCOMMERCE_API_URL" in process.env;
-const gocommerceProxy = proxy("/.netlify/commerce", {
-  target: process.env.DEVELOP_GOCOMMERCE_API_URL,
-  pathRewrite: {"^/.netlify/commerce" : ""},
-});
+const middleware = hasLocalGocommerce
+  ? [proxy("/.netlify/commerce", {
+    target: process.env.DEVELOP_GOCOMMERCE_API_URL,
+    pathRewrite: {"^/.netlify/commerce" : ""},
+  })]
+  : [];
 
 // Development server with browsersync
 function runServer() {
   browserSync.init({
     server: {
       baseDir: "./dist",
-      middleware: hasLocalGocommerce ? [gocommerceProxy] : [],
+      middleware,
     }
   });
   gulp.watch("./src/js/**/*.js", ["js"]);
